@@ -7,286 +7,307 @@
     <link href="https://fonts.googleapis.com/css2?family=Hind+Vadodara:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --main-red: #d32f2f;
-            --dark-red: #8b0000;
+            --primary: #d32f2f;
+            --primary-dark: #8b0000;
             --gold: #fbc02d;
-            --light-gold: #fff176;
+            --gold-light: #fff176;
+            --bg-soft: #fff9f0;
             --white: #ffffff;
-            --bg-gradient: linear-gradient(135deg, #8b0000 0%, #d32f2f 100%);
+            --shadow: 0 10px 30px rgba(0,0,0,0.1);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
             font-family: 'Hind Vadodara', sans-serif;
-            background: #fdf2f2;
+            background-color: var(--bg-soft);
             color: #333;
             line-height: 1.6;
-            padding-bottom: 80px;
+            overflow-x: hidden;
         }
 
+        /* --- Header & Hero --- */
         header {
-            background: var(--bg-gradient);
+            background: linear-gradient(rgba(139, 0, 0, 0.8), rgba(211, 47, 47, 0.8)), 
+                        url('https://www.transparenttextures.com/patterns/paper-fibers.png');
+            background-color: var(--primary-dark);
             color: var(--white);
-            padding: 30px 15px;
+            padding: 40px 20px;
             text-align: center;
-            border-bottom: 6px solid var(--gold);
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            border-bottom: 5px solid var(--gold);
+            box-shadow: var(--shadow);
         }
 
-        .mantra {
-            font-size: 1.1rem;
-            color: var(--light-gold);
-            font-weight: 600;
-            margin-bottom: 5px;
-            letter-spacing: 1px;
-        }
+        .mantra-top { font-size: 1.1rem; color: var(--gold-light); font-weight: 600; margin-bottom: 5px; letter-spacing: 1px; }
+        .main-title { font-size: 2.2rem; margin: 15px 0; text-shadow: 2px 2px 4px rgba(0,0,0,0.3); font-weight: 700; line-height: 1.3; }
+        .village-tag { background: var(--gold); color: var(--primary-dark); padding: 4px 20px; border-radius: 50px; font-weight: 700; display: inline-block; }
 
-        .main-title {
-            font-size: 2.2rem;
-            margin: 15px 0;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
-            font-weight: 700;
-        }
+        .container { max-width: 800px; margin: -30px auto 50px; padding: 0 15px; position: relative; z-index: 10; }
 
-        .container {
-            max-width: 650px;
-            margin: -30px auto 40px;
-            padding: 0 15px;
-        }
-
+        /* --- Global Card Styles --- */
         .card {
             background: var(--white);
             border-radius: 20px;
             padding: 25px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-            margin-bottom: 25px;
-            border: 1px solid rgba(211, 47, 47, 0.1);
+            margin-bottom: 30px;
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(211, 47, 47, 0.05);
+            transition: transform 0.3s ease;
         }
 
         .section-title {
-            color: var(--dark-red);
-            font-size: 1.5rem;
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            border-bottom: 2px solid var(--gold);
+            color: var(--primary-dark);
+            font-size: 1.6rem;
+            text-align: center;
+            margin-bottom: 25px;
+            position: relative;
             padding-bottom: 10px;
         }
 
-        /* 🎵 Music Button */
-        .music-btn {
-            position: fixed;
-            bottom: 25px;
-            right: 25px;
-            width: 55px;
-            height: 55px;
-            background: var(--main-red);
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: white;
-            font-size: 24px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.4);
-            cursor: pointer;
-            z-index: 10000;
-            border: 2px solid var(--gold);
-            transition: all 0.3s ease;
+        .section-title::after {
+            content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);
+            width: 80px; height: 3px; background: var(--gold);
         }
 
-        .music-btn.playing {
-            animation: pulse-ring 1.5s infinite;
-        }
-
-        @keyframes pulse-ring {
-            0% { transform: scale(0.9); box-shadow: 0 0 0 0 rgba(211, 47, 47, 0.7); }
-            70% { transform: scale(1); box-shadow: 0 0 0 15px rgba(211, 47, 47, 0); }
-            100% { transform: scale(0.9); box-shadow: 0 0 0 0 rgba(211, 47, 47, 0); }
-        }
-
-        .total-box {
-            background: var(--bg-gradient);
-            color: white;
-            text-align: center;
-            padding: 20px;
-            border-radius: 15px;
-            margin-bottom: 20px;
-        }
-
-        .total-amount {
-            font-size: 2.2rem;
-            font-weight: 700;
-            color: var(--gold);
-        }
-
-        .donor-card {
-            background: #fff9f9;
-            border-radius: 12px;
+        /* --- Dignitaries Section (Bhuva/Pathiyar) --- */
+        .person-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 20px; }
+        .person-box {
+            background: #fff5f5;
             padding: 15px;
-            margin-bottom: 10px;
+            border-radius: 15px;
+            text-align: center;
+            border: 1px solid #ffe0e0;
+        }
+        .person-role { font-size: 0.9rem; color: var(--primary); font-weight: 700; text-transform: uppercase; }
+        .person-name { font-size: 1.1rem; font-weight: 700; margin-top: 5px; }
+
+        /* --- Donor/Yajman Styles --- */
+        .highlight-list { list-style: none; }
+        .highlight-item {
+            padding: 12px;
+            border-bottom: 1px solid #eee;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border: 1px solid #eee;
+        }
+        .highlight-label { color: #666; font-size: 0.95rem; }
+        .highlight-value { font-weight: 700; text-align: right; color: #222; }
+
+        /* --- Schedule/Timeline --- */
+        .day-header {
+            background: var(--primary);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-weight: 600;
+            display: inline-block;
+            margin: 20px 0 15px;
         }
 
-        .loader {
-            border: 4px solid #f3f3f3;
-            border-top: 4px solid var(--gold);
-            border-radius: 50%;
-            width: 30px;
-            height: 30px;
-            animation: spin 1s linear infinite;
-            margin: 20px auto;
+        .timeline { border-left: 3px solid var(--gold); margin-left: 10px; padding-left: 20px; }
+        .time-item { margin-bottom: 20px; position: relative; }
+        .time-item::before {
+            content: '●'; position: absolute; left: -28px; top: 0; color: var(--primary); font-size: 20px;
+        }
+        .t-time { font-weight: 700; color: var(--primary); font-size: 0.9rem; display: block; }
+        .t-desc { font-weight: 600; font-size: 1.05rem; }
+
+        /* --- Donation List UI --- */
+        .total-banner {
+            background: linear-gradient(45deg, var(--primary-dark), var(--primary));
+            color: white; padding: 25px; border-radius: 15px; text-align: center; margin-bottom: 20px;
+        }
+        .total-amt { font-size: 2.5rem; color: var(--gold); font-weight: 800; }
+        .donor-row {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 15px; border-radius: 12px; background: #fafafa; margin-bottom: 10px;
         }
 
+        /* --- Music Toggle --- */
+        .music-fab {
+            position: fixed; bottom: 25px; right: 25px; width: 60px; height: 60px;
+            background: var(--primary); color: white; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 24px; cursor: pointer; z-index: 1000; box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+            border: 3px solid var(--gold);
+        }
+        .music-fab.playing { animation: pulse 2s infinite; }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        .loader { border: 3px solid #f3f3f3; border-top: 3px solid var(--gold); border-radius: 50%; width: 25px; height: 25px; animation: spin 1s linear infinite; margin: auto; }
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
 
-        footer {
-            text-align: center;
-            padding: 30px;
-            background: #333;
-            color: white;
-            margin-top: 50px;
+        @media (max-width: 600px) {
+            .main-title { font-size: 1.7rem; }
+            .person-grid { grid-template-columns: 1fr; }
+            .card { padding: 18px; }
         }
     </style>
 </head>
-<body onclick="handleFirstClick()">
+<body onclick="startAudioOnInteraction()">
 
-<!-- Audio Element -->
-<audio id="bgMusic" loop preload="auto">
-    <source id="musicSource" src="" type="audio/mpeg">
+<!-- Audio Player -->
+<audio id="bgMusic" loop>
+    <source id="musicSrc" src="" type="audio/mpeg">
 </audio>
 
-<!-- Floating Toggle Button -->
-<div id="musicToggle" class="music-btn">
-    <span id="musicIcon">🔇</span>
-</div>
+<div id="musicToggle" class="music-fab">🔇</div>
 
 <header>
-    <div class="mantra">॥ શ્રી ગણેશાય નમઃ ॥</div>
-    <div class="mantra">॥ શ્રી શક્તિ માતાજી ॥</div>
-    <h1 class="main-title">શ્રી બુટ ભવાની માતાજી મૂર્તિ પ્રતિષ્ઠા મહોત્સવ</h1>
-    <div class="mantra">ગામ: રાસ્કા</div>
+    <div class="mantra-top">॥ શ્રી ગણેશાય નમઃ ॥ ॥ શ્રી શક્તિ માતાજી ॥</div>
+    <h1 class="main-title">શ્રી બુટ ભવાની માતાજી<br>મૂર્તિ પ્રતિષ્ઠા મહોત્સવ</h1>
+    <div class="village-tag">ગામ: રાસ્કા</div>
 </header>
 
 <div class="container">
     
-    <!-- કાર્યક્રમ વિગત -->
+    <!-- VIP / Officials -->
     <div class="card">
-        <h2 class="section-title">🚩 ઉત્સવ વિગત 🚩</h2>
-        <div style="margin-bottom: 15px; border-bottom: 1px dashed #ccc; padding-bottom: 10px;">
-            <p style="color: var(--dark-red); font-weight: 700;">તારીખ: ૨૮-૦૧-૨૦૨૫ (મંગળવાર)</p>
-            <p>⏰ બપોરે ૧:૦૦ - માતાજીનો ભવ્ય વરઘોડો (નગર ભ્રમણ)</p>
-        </div>
-        <div>
-            <p style="color: var(--dark-red); font-weight: 700;">તારીખ: ૨૯-૦૧-૨૦૨૫ (બુધવાર)</p>
-            <p>⏰ સવારે ૧૦:૩૦ - 🙏 મંગલ મૂર્તિ પ્રતિષ્ઠા વિધિ</p>
+        <div class="person-grid">
+            <div class="person-box">
+                <div class="person-role">ભુવા શ્રી</div>
+                <div class="person-name">ઘનશ્યામભાઈ બાબુભાઈ તલસાણિયા</div>
+            </div>
+            <div class="person-box">
+                <div class="person-role">પાઠીયાર શ્રી</div>
+                <div class="person-name">શામજીભાઈ વાલજીભાઈ સકોડિયા</div>
+            </div>
         </div>
     </div>
 
-    <!-- ફાળો યાદી -->
+    <!-- Hosts & Donors -->
     <div class="card">
-        <h2 class="section-title">📜 Online ફાળો આપનારની યાદી</h2>
-        <div class="total-box">
-            <p>કુલ એકત્રિત ફાળો</p>
-            <div id="totalVal" class="total-amount"><div class="loader"></div></div>
+        <h2 class="section-title">યજમાન તથા દાતાશ્રીઓ</h2>
+        <div class="highlight-list">
+            <div class="highlight-item">
+                <span class="highlight-label">મુખ્યા પટલના યજમાન</span>
+                <span class="highlight-value">વીઠલભાઈ ભુરાભાઈ કાનાણી<br>સાહેબસિંહ મહેન્દ્રસિંહ ઝાલા</span>
+            </div>
+            <div class="highlight-item" style="border-bottom: none; background: #fffdf0; padding: 15px; border-radius: 10px; margin-top: 10px;">
+                <span class="highlight-label"><b>જમણવારના દાતા</b></span>
+                <span class="highlight-value">
+                    બપોર: ભરતસિંહ કેદારસિંહ ઝાલા<br>
+                    સાંજ: વિઠલભાઈ ભુરાભાઈ કાનાણી
+                </span>
+            </div>
         </div>
-        <div id="mainList"><div class="loader"></div></div>
+    </div>
+
+    <!-- Timeline Schedule -->
+    <div class="card">
+        <h2 class="section-title">ઉત્સવ કાર્યક્રમ</h2>
+        
+        <div class="day-header">📅 તારીખ: ૨૮-૦૧-૨૦૨૫ (બુધવાર)</div>
+        <div class="timeline">
+            <div class="time-item"><span class="t-time">સવારે ૦૯:૩૦</span><p class="t-desc">નગરયાત્રા (નગર ભ્રમણ)</p></div>
+            <div class="time-item"><span class="t-time">સાંજે ૦૫:૦૦</span><p class="t-desc">દેહ શુદ્ધિ કાર્યક્રમ</p></div>
+            <div class="time-item"><span class="t-time">સાંજે ૦૬:૦૦</span><p class="t-desc">ધાન્ય નિવાસ માતાજી</p></div>
+        </div>
+
+        <div class="day-header">📅 તારીખ: ૨૯-૦૧-૨૦૨૫ (ગુરુવાર)</div>
+        <div class="timeline">
+            <div class="time-item"><span class="t-time">સવારે ૦૭:૦૦</span><p class="t-desc">સ્થાપિત દેવીનું પૂજન</p></div>
+            <div class="time-item"><span class="t-time">સવારે ૦૮:૦૦</span><p class="t-desc">જળ અભિષેક</p></div>
+            <div class="time-item"><span class="t-time">સવારે ૧૦:૩૦</span><p class="t-desc" style="color:var(--primary); font-weight:800;">🙏 માતાજીની મૂર્તિ પ્રતિષ્ઠા</p></div>
+            <div class="time-item"><span class="t-time">બપોરે ૧૨:૦૦</span><p class="t-desc">મહાપ્રસાદ (ગ્રામજનો તથા મહેમાનો માટે)</p></div>
+            <div class="time-item"><span class="t-time">સાંજે ૦૪:૩૦</span><p class="t-desc">પટલા ની પૂર્ણાહુતિ</p></div>
+            <div class="time-item"><span class="t-time">સાંજે ૦૬:૩૦</span><p class="t-desc">મહાપ્રસાદ</p></div>
+            <div class="time-item"><span class="t-time">રાત્રે ૦૯:૩૦</span><p class="t-desc">ડાકલા-ડમરુ કાર્યક્રમ</p></div>
+            <div class="time-item"><span class="t-time">રાત્રે ૧૧:૦૦</span><p class="t-desc">માતાજીની માંડવી રોપવાની મુહૂર્ત</p></div>
+        </div>
+    </div>
+
+    <!-- Donation Tracker -->
+    <div class="card">
+        <h2 class="section-title">📜 ફાળો આપનારની યાદી</h2>
+        <div class="total-banner">
+            <p style="font-size: 0.9rem; opacity: 0.9;">કુલ એકત્રિત ફાળો</p>
+            <div id="totalVal" class="total-amt"><div class="loader"></div></div>
+        </div>
+        <div id="mainList">
+            <div class="loader" style="margin: 30px auto;"></div>
+        </div>
     </div>
 
 </div>
 
-<footer>
+<footer style="text-align:center; padding: 40px 20px; color: #666;">
     <p>🌺 મા ભવાની સૌનું કલ્યાણ કરે 🌺</p>
-    <p style="font-size: 0.8rem; opacity: 0.7; margin-top: 10px;">શ્રી બુટ ભવાની રાસ્કા પરિવાર</p>
+    <p style="font-size: 0.8rem; margin-top: 10px;">શ્રી બુટ ભવાની રાસ્કા પરિવાર</p>
 </footer>
 
 <script>
-    // --- 🎵 Dynamic Music Logic ---
+    // --- Music Setup ---
     const audio = document.getElementById('bgMusic');
-    const source = document.getElementById('musicSource');
-    const toggleBtn = document.getElementById('musicToggle');
-    const icon = document.getElementById('musicIcon');
-
-    // ૧ થી ૩ માંથી કોઈ પણ એક નંબર રેન્ડમલી પસંદ કરો
-    const randomTrack = Math.floor(Math.random() * 3) + 1;
-    // GitHub RAW URL
-    source.src = `https://raw.githubusercontent.com/dhiyakanani8/donationlist/main/${randomTrack}.mp3`;
+    const musicBtn = document.getElementById('musicToggle');
+    const tracks = [1, 2, 3];
+    const randomTrack = tracks[Math.floor(Math.random() * tracks.length)];
+    document.getElementById('musicSrc').src = `https://raw.githubusercontent.com/dhiyakanani8/donationlist/main/${randomTrack}.mp3`;
     audio.load();
 
-    let audioStarted = false;
-
-    function startMusic() {
-        if (!audioStarted) {
+    let hasStarted = false;
+    function startAudioOnInteraction() {
+        if (!hasStarted) {
             audio.play().then(() => {
-                audioStarted = true;
-                icon.innerText = "🔊";
-                toggleBtn.classList.add('playing');
-            }).catch(err => {
-                console.log("Autoplay blocked, waiting for user interaction");
-            });
+                hasStarted = true;
+                musicBtn.innerText = "🔊";
+                musicBtn.classList.add('playing');
+            }).catch(e => console.log("Waiting for user..."));
         }
     }
 
-    // બટન દ્વારા ચાલુ/બંધ
-    toggleBtn.addEventListener('click', (e) => {
+    musicBtn.addEventListener('click', (e) => {
         e.stopPropagation();
         if (audio.paused) {
             audio.play();
-            icon.innerText = "🔊";
-            toggleBtn.classList.add('playing');
+            musicBtn.innerText = "🔊";
+            musicBtn.classList.add('playing');
         } else {
             audio.pause();
-            icon.innerText = "🔇";
-            toggleBtn.classList.remove('playing');
+            musicBtn.innerText = "🔇";
+            musicBtn.classList.remove('playing');
         }
     });
 
-    // ઓટો-સ્ટાર્ટ ટ્રીક: ગમે ત્યાં ટચ, ક્લિક કે સ્ક્રૉલ કરવાથી મ્યુઝિક શરૂ થશે
-    function handleFirstClick() {
-        startMusic();
-    }
-    window.addEventListener('scroll', startMusic, { once: true });
-    window.addEventListener('touchstart', startMusic, { once: true });
-    window.addEventListener('mousedown', startMusic, { once: true });
-
-
-    // --- 📊 Data Fetching Logic ---
-    const API_URL = "https://script.google.com/macros/s/AKfycbwkcvhOgd2O12xdrhXkrsqg7NYIoRO8pHGKPEF2Om7ay8bsPVy-r1wA5UUD9Zx_aOWO2w/exec?api=alldata";
+    // --- Data Fetching ---
+    const API = "https://script.google.com/macros/s/AKfycbwkcvhOgd2O12xdrhXkrsqg7NYIoRO8pHGKPEF2Om7ay8bsPVy-r1wA5UUD9Zx_aOWO2w/exec?api=alldata";
 
     function toGuj(n) {
-        const dict = {'0':'૦','1':'૧','2':'૨','3':'૩','4':'૪','5':'૫','6':'૬','7':'૭','8':'૮','9':'૯'};
-        return n.toString().replace(/\d/g, m => dict[m]);
+        const d = {'0':'૦','1':'૧','2':'૨','3':'૩','4':'૪','5':'૫','6':'૬','7':'૭','8':'૮','9':'૯'};
+        return n.toString().replace(/\d/g, m => d[m]);
     }
 
-    async function loadData() {
+    async function fetchData() {
         try {
-            const response = await fetch(API_URL);
-            const data = await response.json();
+            const res = await fetch(API);
+            const data = await res.json();
             
-            const formattedTotal = data.total.toLocaleString('en-IN');
-            document.getElementById('totalVal').innerText = "₹ " + toGuj(formattedTotal);
+            document.getElementById('totalVal').innerText = "₹ " + toGuj(data.total.toLocaleString('en-IN'));
             
-            const listDiv = document.getElementById('mainList');
-            listDiv.innerHTML = data.records.map(item => `
-                <div class="donor-card">
+            const html = data.records.map(r => `
+                <div class="donor-row">
                     <div>
-                        <div style="font-weight:700;">${item.name}</div>
-                        <div style="font-size:0.8rem; color:#666;">📍 ${item.village.replace("રસ્કા", "રાસ્કા")}</div>
+                        <div style="font-weight:700;">${r.name}</div>
+                        <div style="font-size:0.8rem; color:#666;">📍 ${r.village.replace("રસ્કા", "રાસ્કા")}</div>
                     </div>
-                    <div style="font-weight:700; color:#2e7d32; font-size:1.1rem;">₹ ${toGuj(item.amount.toLocaleString('en-IN'))}</div>
+                    <div style="color:var(--primary-dark); font-weight:700; font-size:1.1rem;">₹ ${toGuj(r.amount.toLocaleString('en-IN'))}</div>
                 </div>
             `).join('');
+            document.getElementById('mainList').innerHTML = html;
         } catch (e) {
-            document.getElementById('totalVal').innerText = "ફરી પ્રયાસ કરો";
+            document.getElementById('totalVal').innerText = "Error";
         }
     }
 
-    loadData();
+    fetchData();
+    
+    // Also listen for scroll to trigger audio
+    window.addEventListener('scroll', startAudioOnInteraction, { once: true });
 </script>
 
 </body>

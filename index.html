@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>શ્રી બુટ ભવાની માતાજી - રસ્કા</title>
+    <title>શ્રી બુટ ભવાની માતાજી - રાસ્કા</title>
     <link href="https://fonts.googleapis.com/css2?family=Hind+Vadodara:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -22,9 +22,9 @@
             background: #fdf2f2;
             color: #333;
             line-height: 1.6;
+            padding-bottom: 80px;
         }
 
-        /* Header Styles */
         header {
             background: var(--bg-gradient);
             color: var(--white);
@@ -55,7 +55,6 @@
             padding: 0 15px;
         }
 
-        /* Card Styles */
         .card {
             background: var(--white);
             border-radius: 20px;
@@ -77,38 +76,37 @@
             padding-bottom: 10px;
         }
 
-        /* Event Schedule Styles */
-        .event-item {
-            display: flex;
-            margin-bottom: 20px;
-            position: relative;
-            padding-left: 20px;
-            border-left: 3px solid var(--gold);
-        }
-
-        .event-date {
+        /* 🎵 Music Button */
+        .music-btn {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            width: 55px;
+            height: 55px;
             background: var(--main-red);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             color: white;
-            padding: 5px 15px;
-            border-radius: 50px;
-            font-size: 0.9rem;
-            margin-bottom: 15px;
-            display: inline-block;
+            font-size: 24px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+            cursor: pointer;
+            z-index: 10000;
+            border: 2px solid var(--gold);
+            transition: all 0.3s ease;
         }
 
-        .event-time {
-            font-weight: 700;
-            color: var(--main-red);
-            min-width: 90px;
-            display: block;
+        .music-btn.playing {
+            animation: pulse-ring 1.5s infinite;
         }
 
-        .event-desc {
-            font-size: 1.05rem;
-            font-weight: 500;
+        @keyframes pulse-ring {
+            0% { transform: scale(0.9); box-shadow: 0 0 0 0 rgba(211, 47, 47, 0.7); }
+            70% { transform: scale(1); box-shadow: 0 0 0 15px rgba(211, 47, 47, 0); }
+            100% { transform: scale(0.9); box-shadow: 0 0 0 0 rgba(211, 47, 47, 0); }
         }
 
-        /* Falo List Styles */
         .total-box {
             background: var(--bg-gradient);
             color: white;
@@ -133,16 +131,8 @@
             justify-content: space-between;
             align-items: center;
             border: 1px solid #eee;
-            transition: transform 0.2s;
         }
 
-        .donor-card:hover { transform: scale(1.02); }
-
-        .donor-info .name { font-weight: 700; font-size: 1.1rem; color: #222; }
-        .donor-info .village { font-size: 0.85rem; color: #666; }
-        .donor-amount { font-weight: 700; color: #2e7d32; font-size: 1.2rem; }
-
-        /* Loader */
         .loader {
             border: 4px solid #f3f3f3;
             border-top: 4px solid var(--gold);
@@ -162,90 +152,113 @@
             color: white;
             margin-top: 50px;
         }
-
-        @media (max-width: 480px) {
-            .main-title { font-size: 1.6rem; }
-            .card { padding: 15px; }
-            .event-desc { font-size: 0.95rem; }
-        }
     </style>
 </head>
-<body>
+<body onclick="handleFirstClick()">
+
+<!-- Audio Element -->
+<audio id="bgMusic" loop preload="auto">
+    <source id="musicSource" src="" type="audio/mpeg">
+</audio>
+
+<!-- Floating Toggle Button -->
+<div id="musicToggle" class="music-btn">
+    <span id="musicIcon">🔇</span>
+</div>
 
 <header>
     <div class="mantra">॥ શ્રી ગણેશાય નમઃ ॥</div>
     <div class="mantra">॥ શ્રી શક્તિ માતાજી ॥</div>
     <h1 class="main-title">શ્રી બુટ ભવાની માતાજી મૂર્તિ પ્રતિષ્ઠા મહોત્સવ</h1>
-    <div class="mantra">ગામ: રસ્કા</div>
+    <div class="mantra">ગામ: રાસ્કા</div>
 </header>
 
 <div class="container">
     
-    <!-- કાર્યક્રમ પત્રિકા -->
+    <!-- કાર્યક્રમ વિગત -->
     <div class="card">
         <h2 class="section-title">🚩 ઉત્સવ વિગત 🚩</h2>
-        
-        <div class="event-group">
-            <span class="event-date">તારીખ: ૨૮-૦૧-૨૦૨૫ (મંગળવાર)</span>
-            <div class="event-item">
-                <div>
-                    <span class="event-time">⏰ બપોરે ૧:૦૦</span>
-                    <p class="event-desc">માતાજીનો ભવ્ય વરઘોડો (નગર ભ્રમણ)</p>
-                </div>
-            </div>
-            <!--<div class="event-item">-->
-            <!--    <div>-->
-            <!--        <span class="event-time">⏰ સાંજે ૬:૦૦</span>-->
-            <!--        <p class="event-desc">સ્નેહ દેહશાન વિધિ તથા પાટલા વિધિનો પ્રારંભ</p>-->
-            <!--    </div>-->
-            <!--</div>-->
+        <div style="margin-bottom: 15px; border-bottom: 1px dashed #ccc; padding-bottom: 10px;">
+            <p style="color: var(--dark-red); font-weight: 700;">તારીખ: ૨૮-૦૧-૨૦૨૫ (મંગળવાર)</p>
+            <p>⏰ બપોરે ૧:૦૦ - માતાજીનો ભવ્ય વરઘોડો (નગર ભ્રમણ)</p>
         </div>
-
-        <div class="event-group" style="margin-top: 20px;">
-            <span class="event-date">તારીખ: ૨૯-૦૧-૨૦૨૫ (બુધવાર)</span>
-            <div class="event-item">
-                <div>
-                    <span class="event-time">⏰ સવારે ૧૦:૩૦</span>
-                    <p class="event-desc" style="color: var(--main-red); font-weight: bold;">🙏 મંગલ મૂર્તિ પ્રતિષ્ઠા વિધિ</p>
-                </div>
-            </div>
-            <div class="event-item">
-                <div>
-                    <span class="event-time">⏰ બપોરે ૧૨:૦૦</span>
-                    <p class="event-desc">પાટલા વિધિનો શુભ પ્રારંભ</p>
-                </div>
-            </div>
+        <div>
+            <p style="color: var(--dark-red); font-weight: 700;">તારીખ: ૨૯-૦૧-૨૦૨૫ (બુધવાર)</p>
+            <p>⏰ સવારે ૧૦:૩૦ - 🙏 મંગલ મૂર્તિ પ્રતિષ્ઠા વિધિ</p>
         </div>
     </div>
 
-    <!-- ફાળો સેક્શન -->
+    <!-- ફાળો યાદી -->
     <div class="card">
         <h2 class="section-title">📜 Online ફાળો આપનારની યાદી</h2>
-        
         <div class="total-box">
             <p>કુલ એકત્રિત ફાળો</p>
-            <div id="totalVal" class="total-amount">
-                <div class="loader"></div>
-            </div>
+            <div id="totalVal" class="total-amount"><div class="loader"></div></div>
         </div>
-
-        <div id="mainList">
-            <!-- Data will load here -->
-            <div class="loader"></div>
-        </div>
+        <div id="mainList"><div class="loader"></div></div>
     </div>
 
 </div>
 
 <footer>
     <p>🌺 મા ભવાની સૌનું કલ્યાણ કરે 🌺</p>
-    <p style="font-size: 0.8rem; opacity: 0.7; margin-top: 10px;">શ્રી બુટ ભવાની રસ્કા પરિવાર</p>
+    <p style="font-size: 0.8rem; opacity: 0.7; margin-top: 10px;">શ્રી બુટ ભવાની રાસ્કા પરિવાર</p>
 </footer>
 
 <script>
+    // --- 🎵 Dynamic Music Logic ---
+    const audio = document.getElementById('bgMusic');
+    const source = document.getElementById('musicSource');
+    const toggleBtn = document.getElementById('musicToggle');
+    const icon = document.getElementById('musicIcon');
+
+    // ૧ થી ૩ માંથી કોઈ પણ એક નંબર રેન્ડમલી પસંદ કરો
+    const randomTrack = Math.floor(Math.random() * 3) + 1;
+    // GitHub RAW URL
+    source.src = `https://raw.githubusercontent.com/dhiyakanani8/donationlist/main/${randomTrack}.mp3`;
+    audio.load();
+
+    let audioStarted = false;
+
+    function startMusic() {
+        if (!audioStarted) {
+            audio.play().then(() => {
+                audioStarted = true;
+                icon.innerText = "🔊";
+                toggleBtn.classList.add('playing');
+            }).catch(err => {
+                console.log("Autoplay blocked, waiting for user interaction");
+            });
+        }
+    }
+
+    // બટન દ્વારા ચાલુ/બંધ
+    toggleBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        if (audio.paused) {
+            audio.play();
+            icon.innerText = "🔊";
+            toggleBtn.classList.add('playing');
+        } else {
+            audio.pause();
+            icon.innerText = "🔇";
+            toggleBtn.classList.remove('playing');
+        }
+    });
+
+    // ઓટો-સ્ટાર્ટ ટ્રીક: ગમે ત્યાં ટચ, ક્લિક કે સ્ક્રૉલ કરવાથી મ્યુઝિક શરૂ થશે
+    function handleFirstClick() {
+        startMusic();
+    }
+    window.addEventListener('scroll', startMusic, { once: true });
+    window.addEventListener('touchstart', startMusic, { once: true });
+    window.addEventListener('mousedown', startMusic, { once: true });
+
+
+    // --- 📊 Data Fetching Logic ---
     const API_URL = "https://script.google.com/macros/s/AKfycbwkcvhOgd2O12xdrhXkrsqg7NYIoRO8pHGKPEF2Om7ay8bsPVy-r1wA5UUD9Zx_aOWO2w/exec?api=alldata";
 
-    function toGujarati(n) {
+    function toGuj(n) {
         const dict = {'0':'૦','1':'૧','2':'૨','3':'૩','4':'૪','5':'૫','6':'૬','7':'૭','8':'૮','9':'૯'};
         return n.toString().replace(/\d/g, m => dict[m]);
     }
@@ -254,32 +267,22 @@
         try {
             const response = await fetch(API_URL);
             const data = await response.json();
-
-            // Update Total
-            const formattedTotal = data.total.toLocaleString('en-IN');
-            document.getElementById('totalVal').innerText = "₹ " + toGujarati(formattedTotal);
             
-            // Update List
+            const formattedTotal = data.total.toLocaleString('en-IN');
+            document.getElementById('totalVal').innerText = "₹ " + toGuj(formattedTotal);
+            
             const listDiv = document.getElementById('mainList');
-            if (data.records.length === 0) {
-                listDiv.innerHTML = "<p style='text-align:center'>હાલ કોઈ માહિતી ઉપલબ્ધ નથી.</p>";
-                return;
-            }
-
             listDiv.innerHTML = data.records.map(item => `
                 <div class="donor-card">
-                    <div class="donor-info">
-                        <div class="name">${item.name}</div>
-                        <div class="village">📍 ${item.village}</div>
+                    <div>
+                        <div style="font-weight:700;">${item.name}</div>
+                        <div style="font-size:0.8rem; color:#666;">📍 ${item.village.replace("રસ્કા", "રાસ્કા")}</div>
                     </div>
-                    <div class="donor-amount">₹ ${toGujarati(item.amount.toLocaleString('en-IN'))}</div>
+                    <div style="font-weight:700; color:#2e7d32; font-size:1.1rem;">₹ ${toGuj(item.amount.toLocaleString('en-IN'))}</div>
                 </div>
             `).join('');
-
-        } catch (error) {
-            console.error("Error:", error);
+        } catch (e) {
             document.getElementById('totalVal').innerText = "ફરી પ્રયાસ કરો";
-            document.getElementById('mainList').innerHTML = "<p style='text-align:center'>ડેટા લોડ કરવામાં મુશ્કેલી પડી રહી છે.</p>";
         }
     }
 

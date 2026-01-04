@@ -35,7 +35,7 @@
         .mantra-top { font-size: 1.1rem; color: var(--gold-light); font-weight: 600; margin-bottom: 10px; }
         .main-title { font-size: 2.1rem; margin: 15px 0; font-weight: 700; text-shadow: 2px 2px 4px rgba(0,0,0,0.3); }
 
-        /* --- Countdown with Seconds --- */
+        /* --- Countdown --- */
         .countdown-container { display: flex; justify-content: center; gap: 8px; margin-top: 25px; flex-wrap: wrap; }
         .count-box { 
             background: rgba(255,255,255,0.15); padding: 10px; border-radius: 12px; 
@@ -56,16 +56,18 @@
             position: relative; padding-bottom: 10px; font-weight: 700;
         }
 
-        /* --- Personnel Styling --- */
+        /* --- Personnel Styling (Bhuva & Pathiyar) --- */
         .person-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; text-align: center; }
         .person-item { background: #fff5f5; padding: 20px; border-radius: 15px; border: 1px solid #ffe0e0; }
         .person-role { color: var(--primary); font-weight: 700; font-size: 0.9rem; letter-spacing: 1px; }
         .person-name { font-size: 1.1rem; font-weight: 700; margin-top: 5px; color: #222; }
 
-        /* --- Yajman Premium Styling --- */
+        /* --- Updated Yajman Premium Styling --- */
         .yajman-card { background: linear-gradient(135deg, #fff7e6 0%, #fffcf5 100%); border: 2px solid var(--gold); text-align: center; }
-        .yajman-title { color: var(--primary-dark); font-size: 1.3rem; font-weight: 800; margin-bottom: 15px; }
-        .yajman-name { font-size: 1.4rem; color: #222; font-weight: 700; margin: 10px 0; line-height: 1.4; }
+        .yajman-header-tag { background: var(--gold); color: var(--primary-dark); padding: 3px 20px; border-radius: 50px; font-weight: 800; font-size: 0.9rem; display: inline-block; margin-bottom: 15px; }
+        .yajman-title { color: var(--primary-dark); font-size: 1.2rem; font-weight: 800; margin-bottom: 8px; text-transform: uppercase; }
+        .yajman-name { font-size: 1.4rem; color: #222; font-weight: 700; margin: 5px 0; line-height: 1.4; }
+        .yajman-role-desc { font-size: 0.95rem; color: #d32f2f; font-weight: 600; margin-bottom: 15px; display: block; }
 
         /* --- Boli List --- */
         .boli-item {
@@ -124,24 +126,35 @@
         </div>
         <div class="person-item">
             <div class="person-role">પાઠીયાર શ્રી</div>
-            <div class="person-name">શામજીભાઈ વાલજીભાઈ સકોડિયા</div>
+            <div class="person-name">શામજીભાઈ વાલજીભાઈ શાકોડિયા</div>
         </div>
     </div>
 
-    <!-- Main Yajman Section -->
+    <!-- Mukhya Patla Yajman Section -->
     <div class="card yajman-card">
-        <h2 class="yajman-title">મુખ્યા પટલના યજમાન</h2>
-        <div class="yajman-name">વીઠલભાઈ ભુરાભાઈ કાનાણી</div>
-        <div style="color: var(--gold-dark); font-weight: bold; font-size: 1.1rem; margin: 5px 0;">અને</div>
-        <div class="yajman-name">સાહેબસિંહ મહેન્દ્રસિંહ ઝાલા</div>
+        <div class="yajman-header-tag">મુખ્ય પાટલાના યજમાન</div>
+        
+        <div style="margin-bottom: 20px;">
+            <div class="yajman-title">મુખ્ય પાટલા ૧</div>
+            <div class="yajman-name">વીઠલભાઈ ભુરાભાઈ કાનાણી</div>
+            <span class="yajman-role-desc">(સાંજના જમણવારના દાતા)</span>
+        </div>
+
+        <div style="width: 60px; height: 2px; background: var(--gold); margin: 10px auto 20px;"></div>
+
+        <div>
+            <div class="yajman-title">મુખ્ય પાટલા ૨</div>
+            <div class="yajman-name">સહદેવસિંહ મહેન્દ્રસિંહ ઝાલા</div>
+            <span class="yajman-role-desc" style="color: var(--primary-dark); font-size: 1.2rem;">₹ ૧૦,૦૦,૦૦૦</span>
+        </div>
     </div>
 
     <!-- Lucky Families Section -->
     <div class="card">
         <h2 class="section-title">🚩 લાભ લેનાર ભાગ્યશાળી પરિવારો 🚩</h2>
         <div class="boli-item">
-            <div style="flex:1"><span class="boli-tag">મુખ્ય પાટલાની બોલી</span><span class="boli-user">સહદેવસિંહ મહેન્દ્રસિંહ ઝાલા</span></div>
-            <div class="boli-amt">₹ ૧,૦૦,૦૦૦</div>
+            <div style="flex:1"><span class="boli-tag">મુખ્ય પાટલા ૨ ની બોલી</span><span class="boli-user">સહદેવસિંહ મહેન્દ્રસિંહ ઝાલા</span></div>
+            <div class="boli-amt">₹ ૧૦,૦૦,૦૦૦</div>
         </div>
         <div class="boli-item">
             <div style="flex:1"><span class="boli-tag">કળશની બોલી</span><span class="boli-user">ભરવાડ સમાજ (ડાંગર + ગમારા)</span></div>
@@ -157,22 +170,27 @@
         </div>
     </div>
 
-    <!-- Schedule Details -->
+    <!-- Corrected Schedule Details as per 2026 Calendar -->
     <div class="card">
         <h2 class="section-title">ઉત્સવ કાર્યક્રમ વિગત</h2>
-        <div class="day-tag">📅 ૨૮-૦૧-૨૦૨૬ (બુધવાર)</div>
+        
+        <!-- Jan 28, 2026 is Wednesday (બુધવાર) -->
+        <div class="day-tag">🗓️ ૨૮-૦૧-૨૦૨૬ (બુધવાર)</div>
         <div class="event-item"><div style="color:var(--primary); font-weight:700;">૦૯:૩૦ AM</div><div style="font-weight:600;">નગરયાત્રા (નગર ભ્રમણ)</div></div>
-        <div class="event-item"><div style="color:var(--primary); font-weight:700;">૦૫:૦૦ PM</div><div style="font-weight:600;">દેહ શુદ્ધિ કાર્યક્રમ - પાટલામાં બેસનાર માટે</div></div>
-        <div class="event-item" style="border:none;"><div style="color:var(--primary); font-weight:700;">૦૬:૦૦ PM</div><div style="font-weight:600;">ધાન્ય નિવાસ માતાજી</div></div>
+        <div class="event-item"><div style="color:var(--primary); font-weight:700;">૦૫:૦૦ PM</div><div style="font-weight:600;">દેહ શુદ્ધિ કાર્યક્રમ</div></div>
+        <div class="event-item" style="border:none;"><div style="color:var(--primary); font-weight:700;">૦૬:૦૦ PM</div><div style="font-weight:600;">ધાન્ય નિવાસ માતાજી વિધિ</div></div>
 
-        <div class="day-tag">📅 ૨૯-૦૧-૨૦૨૬ (ગુરુવાર)</div>
+        <!-- Jan 29, 2026 is Thursday (ગુરુવાર) -->
+        <div class="day-tag">🗓️ ૨૯-૦૧-૨૦૨૬ (ગુરુવાર)</div>
         <div class="event-item"><div style="color:var(--primary); font-weight:700;">૦૭:૦૦ AM</div><div style="font-weight:600;">સ્થાપિત દેવીનું પૂજન</div></div>
         <div class="event-item"><div style="color:var(--primary); font-weight:700;">૧૦:૩૦ AM</div><div style="color:var(--primary); font-weight:800; font-size:1.1rem;">🙏 મૂર્તિ પ્રતિષ્ઠા મહોત્સવ</div></div>
         <div class="event-item"><div style="color:var(--primary); font-weight:700;">૧૨:૦૦ PM</div><div style="font-weight:600;">મહાપ્રસાદ (ભોજન સમારંભ)</div></div>
+        <div class="event-item"><div style="color:var(--primary); font-weight:700;">૦૪:૩૦ PM</div><div style="font-weight:600;">પટલા ની પૂર્ણાહુતિ</div></div>
+        <div class="event-item"><div style="color:var(--primary); font-weight:700;">૦૬:૩૦ PM</div><div style="font-weight:600;">મહાપ્રસાદ</div></div>
         <div class="event-item" style="border:none;"><div style="color:var(--primary); font-weight:700;">૦૯:૩૦ PM</div><div style="font-weight:600;">ભવ્ય ડાકલા-ડમરુ કાર્યક્રમ</div></div>
     </div>
 
-    <!-- Donation Section -->
+    <!-- Donation Tracker -->
     <div class="total-card">
         <div style="font-size: 1rem; opacity: 0.9;">કુલ એકત્રિત ફાળો</div>
         <div id="totalVal" class="total-val"><div class="loader"></div></div>
@@ -191,7 +209,7 @@
 </footer>
 
 <script>
-    // --- ⏰ Countdown Timer with Seconds (Target: Jan 29, 2026, 10:30 AM) ---
+    // --- ⏰ Countdown Timer (Jan 29, 2026, 10:30 AM) ---
     function updateTimer() {
         const targetDate = new Date(2026, 0, 29, 10, 30, 0).getTime();
         const now = new Date().getTime();
@@ -212,9 +230,9 @@
         }
     }
     updateTimer();
-    setInterval(updateTimer, 1000); // Updated to 1 second
+    setInterval(updateTimer, 1000);
 
-    // --- 🎵 Music Control Logic ---
+    // --- 🎵 Music Control ---
     const audio = document.getElementById('bgMusic');
     const musicBtn = document.getElementById('musicToggle');
     const randomTrack = Math.floor(Math.random() * 3) + 1;
@@ -234,7 +252,7 @@
         else { audio.pause(); musicBtn.innerText = "🔇"; }
     });
 
-    // --- 📊 Data Logic ---
+    // --- 📊 Data Fetching ---
     function toGuj(n) {
         const d = {'0':'૦','1':'૧','2':'૨','3':'૩','4':'૪','5':'૫','6':'૬','7':'૭','8':'૮','9':'૯'};
         return n.toString().replace(/\d/g, m => d[m]);
